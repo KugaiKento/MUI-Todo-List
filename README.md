@@ -50,4 +50,6 @@ function useLocalStorage<T>(key: string, initialValue: T) {
 }
 ```
 
-これをもとにタスクの追加や削除もできるようになる。(いいね) useTasksっていうフックを作ればコンポーネントはすっきりしそうだね
+これをもとにタスクの追加や削除もできるようになる。(いいね) useTasksっていうフックを作ればコンポーネントはすっきりしそうだね。
+
+参考リンク：https://envader.plus/article/505
