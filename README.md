@@ -33,7 +33,7 @@ export default App;
 
 カスタムフックは、React に搭載されている標準フックの機能を組み合わせて、オリジナルの処理を持つフックを作成することができるそう。アプリケーション内で共通する機能を 1 つにまとめたり、新たな独自の機能を追加することができる便利な仕組み。
 
-作成した Todo をローカルストレージを操作するフックを作成もできる。
+ローカルストレージを操作するフックを作成もできる。
 
 ```jsx
 function useLocalStorage<T>(key: string, initialValue: T) {
@@ -49,3 +49,5 @@ function useLocalStorage<T>(key: string, initialValue: T) {
   return [value, setValue] as const;
 }
 ```
+
+これをもとにタスクの追加や削除もできるようになる。(いいね)
