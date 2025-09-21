@@ -52,4 +52,30 @@ function useLocalStorage<T>(key: string, initialValue: T) {
 
 これをもとにタスクの追加や削除もできるようになる。(いいね) useTasksっていうフックを作ればコンポーネントはすっきりしそうだね。
 
+```jsx
+
+function useTasks(key: string) {
+  const [tasks, setTasks] = useLocalStorage<string[]>(key, []);
+
+  // タスクを追加
+  const addTask = (task: string) => {
+    setTasks([...tasks, task]);
+  };
+
+  // タスクを削除
+  const removeTask = (index: number) => {
+    setTasks(tasks.filter((_, i) => i !== index));
+  };
+
+  // タスクを更新
+  const updateTask = (index: number, newTask: string) => {
+    setTasks(tasks.map((t, i) => (i === index ? newTask : t)));
+  };
+
+  return { tasks, addTask, removeTask, updateTask };
+}
+
+
+```
+
 参考リンク：https://envader.plus/article/505
