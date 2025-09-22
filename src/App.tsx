@@ -1,53 +1,21 @@
-import { useEffect, useState } from "react";
-
-function useLocalStorage<T>(key: string, initialValue: T) {
-  const [value, setValue] = useState<T>(() => {
-    const stored = localStorage.getItem(key);
-    return stored ? JSON.parse(stored) : initialValue;
-  });
-
-  useEffect(() => {
-    localStorage.setItem(key, JSON.stringify(value));
-  }, [key, value]);
-
-  return [value, setValue] as const;
-}
+import { Modal } from "./components/Modal/Modal";
+import { useTasks } from "./hooks/useTasks";
 
 function App() {
-  const [tasks, setTasks] = useLocalStorage<Record<string, string>>(
-    "tasks",
-    {}
-  );
-  const [input, setInput] = useState("");
-
-  const addTask = () => {
-    if (!input) return;
-    const id = Date.now().toString(); // 時刻をキーにする
-    setTasks({ ...tasks, [id]: input });
-    setInput("");
-  };
-
-  const removeTask = (id: string) => {
-    const updated = { ...tasks };
-    delete updated[id];
-    setTasks(updated);
-  };
+  const { tasks, input, setInput, addTask, removeTask } = useTasks();
 
   return (
-    <>
-      <div>
-        <input value={input} onChange={(e) => setInput(e.target.value)} />
-        <button onClick={addTask}>追加</button>
-        <ul>
-          {Object.entries(tasks).map(([id, text]) => (
-            <li key={id}>
-              {text}
-              <button onClick={() => removeTask(id)}>削除</button>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </>
+    <div>
+      <Modal input={input} setInput={setInput} addTask={addTask} />
+      <ul>
+        {Object.entries(tasks).map(([id, text]) => (
+          <li key={id}>
+            {text}
+            <button onClick={() => removeTask(id)}>削除</button>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 
