@@ -1,3 +1,4 @@
+import _Button from "./components/Button/_Button";
 import { Modal } from "./components/Modal/Modal";
 import { useTasks } from "./hooks/useTasks";
 
@@ -15,6 +16,7 @@ function App() {
           </li>
         ))}
       </ul>
+      <_Button />
     </div>
   );
 }

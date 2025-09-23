@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 /**
- *ローカルストレージを操作するための汎用的なフック
+ *ローカルストレージを操作するためのカスタムフック
  */
 export function useLocalStorage<T>(key: string, initialValue: T) {
   const [value, setValue] = useState<T>(() => {
